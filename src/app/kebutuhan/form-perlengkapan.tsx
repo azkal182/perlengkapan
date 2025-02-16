@@ -105,7 +105,7 @@ const FormPerlengkapan = () => {
             <div className="mb-4">
               <Label
                 htmlFor={`perlengkapan-${index}`}
-                className="block font-medium"
+                className="block font-bold"
               >
                 Perlengkapan
               </Label>
@@ -115,58 +115,68 @@ const FormPerlengkapan = () => {
                 name={`perlengkapan-${index}`}
                 value={item.name}
                 onChange={(e) => handlePerlengkapanChange(index, e)}
-                placeholder="Nama perlengkapan semisal Pj. Parkir"
+                placeholder="semisal Pj. Parkir"
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
             </div>
 
-            {item.kebutuhan.map((kebutuhanItem, subIndex) => (
-              <div key={subIndex} className="mb-4 flex items-center space-x-2">
-                <div className="flex-1">
-                  <Label
-                    htmlFor={`kebutuhan-${index}-${subIndex}`}
-                    className="block font-medium"
-                  >
-                    Kebutuhan
-                  </Label>
-                  <Input
-                    type="text"
-                    id={`kebutuhan-${index}-${subIndex}`}
-                    name="name"
-                    value={kebutuhanItem.name}
-                    onChange={(e) => handleKebutuhanChange(index, subIndex, e)}
-                    placeholder="Nama kebutuhan semisal meja"
-                    className="mt-1 p-2 border rounded w-full"
-                    required
-                  />
-                </div>
-                <div className="flex-1">
-                  <Label
-                    htmlFor={`jumlah-${index}-${subIndex}`}
-                    className="block font-medium"
-                  >
-                    Jumlah
-                  </Label>
-                  <Input
-                    type="number"
-                    id={`jumlah-${index}-${subIndex}`}
-                    name="jumlah"
-                    value={kebutuhanItem.jumlah}
-                    onChange={(e) => handleKebutuhanChange(index, subIndex, e)}
-                    placeholder="Jumlah"
-                    className="mt-1 p-2 border rounded w-full"
-                    required
-                  />
-                </div>
-                <Button
-                  type="button"
-                  onClick={() => removeKebutuhan(index, subIndex)}
+            <div className="mt-8">
+              {item.kebutuhan.map((kebutuhanItem, subIndex) => (
+                <div
+                  key={subIndex}
+                  className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center"
                 >
-                  Hapus
-                </Button>
-              </div>
-            ))}
+                  <div className="flex-1">
+                    <Label
+                      htmlFor={`kebutuhan-${index}-${subIndex}`}
+                      className="block font-medium"
+                    >
+                      Kebutuhan
+                    </Label>
+                    <Input
+                      type="text"
+                      id={`kebutuhan-${index}-${subIndex}`}
+                      name="name"
+                      value={kebutuhanItem.name}
+                      onChange={(e) =>
+                        handleKebutuhanChange(index, subIndex, e)
+                      }
+                      placeholder="semisal meja"
+                      className="mt-1 p-2 border rounded w-full"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <Label
+                      htmlFor={`jumlah-${index}-${subIndex}`}
+                      className="block font-medium"
+                    >
+                      Jumlah
+                    </Label>
+                    <Input
+                      type="number"
+                      id={`jumlah-${index}-${subIndex}`}
+                      name="jumlah"
+                      value={kebutuhanItem.jumlah}
+                      onChange={(e) =>
+                        handleKebutuhanChange(index, subIndex, e)
+                      }
+                      placeholder="Jumlah"
+                      className="mt-1 p-2 border rounded w-full"
+                      required
+                    />
+                  </div>
+                  <Button
+                    type="button"
+                    onClick={() => removeKebutuhan(index, subIndex)}
+                    className="sm:self-end"
+                  >
+                    Hapus
+                  </Button>
+                </div>
+              ))}
+            </div>
 
             <Button type="button" onClick={() => addKebutuhan(index)}>
               Tambah Kebutuhan
