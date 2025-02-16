@@ -78,17 +78,23 @@ const FormPerlengkapan = () => {
   };
 
   // Menghapus perlengkapan
-  const removePerlengkapan = (index: number) => {
-    const updatedPerlengkapan = [...perlengkapan];
-    updatedPerlengkapan.splice(index, 1);
-    setPerlengkapan(updatedPerlengkapan);
-  };
+  //   const removePerlengkapan = (index: number) => {
+  //     const updatedPerlengkapan = [...perlengkapan];
+  //     updatedPerlengkapan.splice(index, 1);
+  //     setPerlengkapan(updatedPerlengkapan);
+  //   };
 
   // Menangani submit form
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    createPerlengkapan(perlengkapan);
-    // console.log(perlengkapan);
+    await createPerlengkapan(perlengkapan);
+    // Reset form state
+    setPerlengkapan([
+      {
+        name: "",
+        kebutuhan: [{ name: "", jumlah: "" }],
+      },
+    ]);
   };
 
   return (
@@ -101,7 +107,7 @@ const FormPerlengkapan = () => {
                 htmlFor={`perlengkapan-${index}`}
                 className="block font-medium"
               >
-                Perlengkapan {index + 1}
+                Perlengkapan
               </Label>
               <Input
                 type="text"
@@ -109,7 +115,7 @@ const FormPerlengkapan = () => {
                 name={`perlengkapan-${index}`}
                 value={item.name}
                 onChange={(e) => handlePerlengkapanChange(index, e)}
-                placeholder="Nama perlengkapan"
+                placeholder="Nama perlengkapan semisal Pj. Parkir"
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
@@ -122,7 +128,7 @@ const FormPerlengkapan = () => {
                     htmlFor={`kebutuhan-${index}-${subIndex}`}
                     className="block font-medium"
                   >
-                    Kebutuhan {subIndex + 1}
+                    Kebutuhan
                   </Label>
                   <Input
                     type="text"
@@ -130,7 +136,7 @@ const FormPerlengkapan = () => {
                     name="name"
                     value={kebutuhanItem.name}
                     onChange={(e) => handleKebutuhanChange(index, subIndex, e)}
-                    placeholder="Nama kebutuhan"
+                    placeholder="Nama kebutuhan semisal meja"
                     className="mt-1 p-2 border rounded w-full"
                     required
                   />
@@ -166,13 +172,13 @@ const FormPerlengkapan = () => {
               Tambah Kebutuhan
             </Button>
 
-            <Button
+            {/* <Button
               className="ml-4"
               type="button"
               onClick={() => removePerlengkapan(index)}
             >
               Hapus Perlengkapan
-            </Button>
+            </Button> */}
           </div>
         ))}
 

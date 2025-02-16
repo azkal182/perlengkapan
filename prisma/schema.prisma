@@ -25,4 +25,5 @@ model Kebutuhan {
     jumlah         Int
     perlengkapan   Perlengkapan? @relation(fields: [perlengkapanId], references: [id])
     perlengkapanId String?
+    done           Boolean?      @default(false)
 }

@@ -8,6 +8,11 @@ const page = () => {
       <div className="flex items-center justify-center">
         <Link href={"/"}>Home</Link>
       </div>
+      <div>
+        <h1 className="text-xl font-bold text-center mt-4">
+          KEBUTUHAN PERLENGKAPAN WIDODARI 1.3
+        </h1>
+      </div>
       <div className="p-4">
         <FormPerlengkapan />
       </div>

@@ -2,6 +2,7 @@
 
 import { Perlengkapan } from "@/app/kebutuhan/form-perlengkapan";
 import { db } from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 export const getPerlengkapan = async () => {
   return await db.perlengkapan.findMany({
@@ -32,6 +33,24 @@ export const createPerlengkapan = async (data: Perlengkapan[]) => {
       data: item,
     });
   }
+  revalidatePath("/");
 
   console.log("Data berhasil disimpan!");
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const updatePerlengkapan = async (item: any) => {
+  const result = await db.kebutuhan.update({
+    where: {
+      id: item.id,
+    },
+    data: {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      done: true,
+    },
+  });
+  revalidatePath("/");
+
+  return result;
 };
